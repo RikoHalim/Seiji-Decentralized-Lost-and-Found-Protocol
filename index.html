@@ -793,9 +793,13 @@
 
       #geohashMap {
         width: 100%;
-        height: 220px;
+        height: 280px;
         background: var(--bg-input);
         cursor: crosshair !important;
+      }
+
+      #geohashMap .leaflet-tile-pane {
+        filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(110%);
       }
 
       /* Dark theme overrides for Leaflet */
@@ -1295,8 +1299,8 @@
       };
 
       let map, marker, boundingRect;
-      let currentLat = 14.5995; // default: Manila
-      let currentLng = 120.9842;
+      let currentLat = 3.1390; // Kuala Lumpur
+      let currentLng = 101.6869;
       let currentPrecision = 5;
 
       const geohashInput = document.getElementById('geohash');
@@ -1312,13 +1316,13 @@
       // ---- Initialize Leaflet Map with dark tiles ----
       map = L.map('geohashMap', {
         center: [currentLat, currentLng],
-        zoom: 12,
+        zoom: 13,
         zoomControl: true,
         attributionControl: true,
       });
 
-      // Dark tile layer (CartoDB Dark Matter)
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      // Modern GIS Tile layer
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,
@@ -1486,7 +1490,10 @@
       });
 
       // ---- Fix Leaflet rendering in hidden/animated containers ----
-      setTimeout(() => map.invalidateSize(), 600);
+      setTimeout(() => {
+        updateFromLatLng(currentLat, currentLng);
+        map.invalidateSize();
+      }, 200);
       window.addEventListener('resize', () => map.invalidateSize());
     })();
     </script>

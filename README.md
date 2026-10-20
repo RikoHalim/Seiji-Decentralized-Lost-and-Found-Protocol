@@ -6,6 +6,20 @@
 
 Seiji is a **Decentralized Physical Infrastructure Network (DePIN)** designed to replace antiquated, centralized lost-and-found systems. By utilizing programmable smart contracts, zero-knowledge proofs, and game-theoretic incentives, Seiji creates a trustless, privacy-preserving, and highly efficient global market for recovering lost physical assets.
 
+---
+
+## 📸 Interface & Live Protocol Previews
+
+| Interactive Geohash Map & Asset Registration | Protocol Core Dashboard |
+|:---:|:---:|
+| ![Geohash Map Picker](screenshots/02_geohash_map_picker.png) | ![Protocol Core Hero](screenshots/01_protocol_hero.png) |
+
+| Report Found & ZK Verification | Recovery & Dispute Escrow |
+|:---:|:---:|
+| ![Report Found Escrow](screenshots/03_report_found_escrow.png) | ![Dispute Management](screenshots/04_recovery_dispute_management.png) |
+
+---
+
 ## 🌟 Core Features
 
 * **Absolute Location Privacy:** Utilizes **Geohash spatial indexing** to map lost items to broad regional grids, ensuring users never have to broadcast their exact GPS coordinates to the public ledger.
