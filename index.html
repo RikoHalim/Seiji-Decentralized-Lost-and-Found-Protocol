@@ -128,14 +128,137 @@
       }
 
       /* ============================
-         MAIN LAYOUT
+         MAIN LAYOUT (DESKTOP WIDE & RESPONSIVE)
          ============================ */
       .app-container {
         position: relative;
         z-index: 1;
-        max-width: 520px;
+        max-width: 1260px;
         margin: 0 auto;
-        padding: 24px 16px 80px;
+        padding: 24px 28px 60px;
+      }
+
+      .navbar .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .navbar .logo-sub {
+        font-size: 11px;
+        color: var(--text-tertiary);
+        letter-spacing: 0.2px;
+      }
+
+      .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .navbar-right .btn-connect {
+        width: auto;
+        padding: 8px 18px;
+        margin-bottom: 0;
+        font-size: 13px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-hover);
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .navbar-right .btn-connect .wallet-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 8px var(--success-glow);
+      }
+
+      .stats-banner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .stat-card {
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-glass);
+        border-radius: var(--radius-md);
+        padding: 14px 20px;
+        text-align: center;
+        transition: border-color var(--transition-fast);
+      }
+      .stat-card:hover {
+        border-color: var(--border-hover);
+      }
+
+      .stat-value {
+        font-size: 22px;
+        font-weight: 800;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        font-family: 'Inter', monospace;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 3px;
+      }
+
+      .dapp-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 24px;
+      }
+
+      .dapp-col-left, .dapp-col-right {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .safeguard-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .safeguard-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .safeguard-item .safe-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 900px) {
+        .stats-banner {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .dapp-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       /* ============================
@@ -793,7 +916,7 @@
 
       #geohashMap {
         width: 100%;
-        height: 280px;
+        height: 350px;
         background: var(--bg-input);
         cursor: crosshair !important;
       }
@@ -1021,116 +1144,171 @@
       <nav class="navbar">
         <div class="logo">
           <div class="logo-icon">S</div>
-          <span class="logo-text">Seiji</span>
+          <div>
+            <span class="logo-text">Seiji</span>
+            <div class="logo-sub">Decentralized Asset Recovery Protocol</div>
+          </div>
         </div>
-        <div class="network-badge" id="networkBadge">
-          <span class="dot"></span>
-          <span>Localhost</span>
+        <div class="navbar-right">
+          <div class="network-badge" id="networkBadge">
+            <span class="dot"></span>
+            <span>Sepolia / Localhost</span>
+          </div>
+          <button class="btn-connect" id="connectWalletBtn">
+            <span class="wallet-dot"></span>
+            <span>0x71C...49b2</span>
+          </button>
         </div>
       </nav>
 
-      <!-- ===== CONNECT WALLET ===== -->
-      <div class="connect-section fade-in-up" style="animation-delay: 0s">
-        <button class="btn-connect disconnected" id="connectWalletBtn">
-          Connect Wallet
-        </button>
+      <!-- Protocol Stats Banner -->
+      <div class="stats-banner fade-in-up">
+        <div class="stat-card">
+          <div class="stat-value">14.85 ETH</div>
+          <div class="stat-label">Total Escrow Value</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">128 Items</div>
+          <div class="stat-label">Active Bounties</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">ZK-SNARK</div>
+          <div class="stat-label">Proximity Proofs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1.5% Fee</div>
+          <div class="stat-label">Non-Custodial Escrow</div>
+        </div>
       </div>
 
-      <!-- ===== CARD 1: REGISTER LOST ITEM ===== -->
-      <div class="glass-card fade-in-up" style="animation-delay: 0.06s">
-        <div class="card-header">
-          <div class="step-badge register">1</div>
-          <div>
-            <h2>Register a Lost Item</h2>
-            <p>Lock a bounty in escrow for finders</p>
+      <!-- Main Protocol 2-Column Grid -->
+      <div class="dapp-grid">
+        <!-- LEFT COLUMN: Register Lost Item -->
+        <div class="dapp-col-left">
+          <div class="glass-card fade-in-up" style="animation-delay: 0.06s">
+            <div class="card-header">
+              <div class="step-badge register">1</div>
+              <div>
+                <h2>Register a Lost Item</h2>
+                <p>Lock an escrow bounty with ZK proximity verification</p>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Item Type</label>
+              <input type="text" id="itemType" placeholder="e.g. Wallet, Laptop, Phone" value="MacBook Pro 16&quot; M3 Max" />
+            </div>
+
+            <!-- Geohash Map Picker -->
+            <div class="geohash-picker">
+              <label>📍 Lost Location — Click Map to Set Geohash</label>
+              <div class="map-wrapper">
+                <div id="geohashMap"></div>
+                <div class="map-toolbar">
+                  <div class="geohash-display">
+                    <span class="geo-icon">🌐</span>
+                    <input type="text" id="geohash" placeholder="Click map or type geohash..." />
+                  </div>
+                  <button type="button" class="btn-locate" id="btnLocate" title="Use my location">
+                    ◎
+                  </button>
+                </div>
+              </div>
+              <div class="precision-row">
+                <label>Precision</label>
+                <input type="range" class="precision-slider" id="precisionSlider" min="1" max="9" value="5" />
+                <span class="precision-value" id="precisionValue">5</span>
+                <span class="precision-hint" id="precisionHint">~4.9km × 4.9km</span>
+              </div>
+              <div class="geohash-info-row" id="geohashInfoRow">
+                <span class="geo-tag" id="geoTagLat">Lat 3.13900</span>
+                <span class="geo-tag" id="geoTagLng">Lng 101.68690</span>
+                <span class="geo-tag" id="geoTagArea">Area ~4.9km × 4.9km</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Reward (ETH)</label>
+              <input type="text" id="rewardAmount" placeholder="e.g. 0.05" value="0.25" />
+            </div>
+
+            <button class="btn-action primary" id="registerBtn">
+              Register Item &amp; Escrow Reward
+            </button>
           </div>
         </div>
 
-        <div class="input-group">
-          <label>Item Type</label>
-          <input type="text" id="itemType" placeholder="e.g. Wallet, Laptop, Phone" />
-        </div>
-
-        <!-- Geohash Map Picker -->
-        <div class="geohash-picker">
-          <label>📍 Lost Location — Click Map to Set Geohash</label>
-          <div class="map-wrapper">
-            <div id="geohashMap"></div>
-            <div class="map-toolbar">
-              <div class="geohash-display">
-                <span class="geo-icon">🌐</span>
-                <input type="text" id="geohash" placeholder="Click map or type geohash..." />
+        <!-- RIGHT COLUMN: Found, Confirm & Protocol Safeguards -->
+        <div class="dapp-col-right">
+          <!-- CARD 2: REPORT FOUND -->
+          <div class="glass-card fade-in-up" style="animation-delay: 0.12s">
+            <div class="card-header">
+              <div class="step-badge found">2</div>
+              <div>
+                <h2>Report Item as Found</h2>
+                <p>Submit a ZK proximity proof with an anti-spam stake</p>
               </div>
-              <button type="button" class="btn-locate" id="btnLocate" title="Use my location">
-                ◎
-              </button>
+            </div>
+
+            <span class="info-tag stake">⚡ Requires 0.01 ETH Anti-Spam Stake</span>
+
+            <div class="input-group">
+              <label>Item ID</label>
+              <input type="number" id="foundItemId" placeholder="e.g. 0" value="1042" />
+            </div>
+
+            <button class="btn-action secondary" id="foundBtn">
+              Report Found &amp; Submit ZK Proof
+            </button>
+          </div>
+
+          <!-- CARD 3: CONFIRM RETURN -->
+          <div class="glass-card fade-in-up" style="animation-delay: 0.18s">
+            <div class="card-header">
+              <div class="step-badge confirm">3</div>
+              <div>
+                <h2>Confirm Physical Return</h2>
+                <p>Owner verifies handover &amp; releases reward</p>
+              </div>
+            </div>
+
+            <span class="info-tag fee">💎 1.5% Protocol Fee Applies</span>
+
+            <div class="input-group">
+              <label>Item ID</label>
+              <input type="number" id="returnItemId" placeholder="e.g. 0" value="1042" />
+            </div>
+
+            <button class="btn-action success" id="confirmBtn">
+              Confirm Return &amp; Release 0.25 ETH
+            </button>
+          </div>
+
+          <!-- PROTOCOL SAFEGUARDS CARD -->
+          <div class="glass-card fade-in-up" style="animation-delay: 0.22s">
+            <div class="card-header">
+              <div class="step-badge dispute">🛡️</div>
+              <div>
+                <h2>Protocol Safeguards &amp; DAO Escrow</h2>
+                <p>Cryptographic guarantees &amp; trustless security</p>
+              </div>
+            </div>
+            <div class="safeguard-list">
+              <div class="safeguard-item">
+                <span class="safe-dot"></span>
+                <span>ZK-SNARK proof verifies finder proximity without revealing exact GPS</span>
+              </div>
+              <div class="safeguard-item">
+                <span class="safe-dot"></span>
+                <span>Anti-Sybil 0.01 ETH stake slashed on fraudulent submissions</span>
+              </div>
+              <div class="safeguard-item">
+                <span class="safe-dot"></span>
+                <span>7-Day inactivity timeout protects finder rewards if owner is unresponsive</span>
+              </div>
             </div>
           </div>
-          <div class="precision-row">
-            <label>Precision</label>
-            <input type="range" class="precision-slider" id="precisionSlider" min="1" max="9" value="5" />
-            <span class="precision-value" id="precisionValue">5</span>
-            <span class="precision-hint" id="precisionHint">~4.9km × 4.9km</span>
-          </div>
-          <div class="geohash-info-row" id="geohashInfoRow" style="display:none">
-            <span class="geo-tag" id="geoTagLat"></span>
-            <span class="geo-tag" id="geoTagLng"></span>
-            <span class="geo-tag" id="geoTagArea"></span>
-          </div>
         </div>
-
-        <div class="input-group">
-          <label>Reward (ETH)</label>
-          <input type="text" id="rewardAmount" placeholder="e.g. 0.05" />
-        </div>
-
-        <button class="btn-action primary" id="registerBtn">
-          Register Item & Escrow Reward
-        </button>
-      </div>
-
-      <!-- ===== CARD 2: REPORT FOUND ===== -->
-      <div class="glass-card fade-in-up" style="animation-delay: 0.12s">
-        <div class="card-header">
-          <div class="step-badge found">2</div>
-          <div>
-            <h2>Report Item as Found</h2>
-            <p>Submit a ZK proximity proof with a stake</p>
-          </div>
-        </div>
-
-        <span class="info-tag stake">⚡ Requires 0.01 ETH Anti-Spam Stake</span>
-
-        <div class="input-group">
-          <label>Item ID</label>
-          <input type="number" id="foundItemId" placeholder="e.g. 0" />
-        </div>
-
-        <button class="btn-action secondary" id="foundBtn">
-          Report Found
-        </button>
-      </div>
-
-      <!-- ===== CARD 3: CONFIRM RETURN ===== -->
-      <div class="glass-card fade-in-up" style="animation-delay: 0.18s">
-        <div class="card-header">
-          <div class="step-badge confirm">3</div>
-          <div>
-            <h2>Confirm Return</h2>
-            <p>Owner verifies physical handover & releases reward</p>
-          </div>
-        </div>
-
-        <span class="info-tag fee">💎 1.5% Protocol Fee Applies</span>
-
-        <div class="input-group">
-          <label>Item ID</label>
-          <input type="number" id="returnItemId" placeholder="e.g. 0" />
-        </div>
-
-        <button class="btn-action success" id="confirmBtn">
-          Confirm Return & Release Reward
-        </button>
       </div>
 
       <!-- ===== ADVANCED SECTION ===== -->
@@ -1142,7 +1320,7 @@
 
       <div class="advanced-section fade-in-up" style="animation-delay: 0.24s">
         <button class="advanced-toggle" id="advancedToggle" onclick="toggleAdvanced()">
-          🛠 Cancel, Timeout & Dispute Controls
+          🛠 Cancel, Timeout &amp; Dispute Controls
           <span class="chevron">▼</span>
         </button>
 
@@ -1162,7 +1340,7 @@
               <input type="number" id="cancelItemId" placeholder="e.g. 0" />
             </div>
             <button class="btn-action warning" id="cancelBtn">
-              Cancel & Withdraw
+              Cancel &amp; Withdraw
             </button>
           </div>
 
@@ -1208,7 +1386,7 @@
       <!-- ===== FOOTER ===== -->
       <div class="footer">
         <p>Seiji Protocol · Decentralized Asset Recovery</p>
-        <p style="margin-top: 4px;">Built with ZK Proofs & Smart Contract Escrow</p>
+        <p style="margin-top: 4px;">Built with ZK Proofs &amp; Smart Contract Escrow</p>
       </div>
 
     </div>
