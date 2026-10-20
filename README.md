@@ -12,11 +12,11 @@ Seiji is a **Decentralized Physical Infrastructure Network (DePIN)** designed to
 
 | Interactive Geohash Map & Asset Registration | Protocol Core Dashboard |
 |:---:|:---:|
-| ![Geohash Map Picker](screenshots/02_geohash_map_picker.png) | ![Protocol Core Hero](screenshots/01_protocol_hero.png) |
+| ![Geohash Map Picker](screenshots/02_desktop_geohash_map.png) | ![Protocol Core Hero](screenshots/01_desktop_hero_overview.png) |
 
 | Report Found & ZK Verification | Recovery & Dispute Escrow |
 |:---:|:---:|
-| ![Report Found Escrow](screenshots/03_report_found_escrow.png) | ![Dispute Management](screenshots/04_recovery_dispute_management.png) |
+| ![Report Found Escrow](screenshots/03_desktop_report_found.png) | ![Dispute Management](screenshots/04_desktop_dispute_escrow.png) |
 
 ---
 
